@@ -18,7 +18,7 @@ createServer({
           type: 'deposit',
           category: 'Desenvolvimento',
           amount: '6000',
-          created_at: new Date('2021-02-12 09:00:00'),
+          createdAt: new Date('2021-02-12'),
         },
         {
           id: 2,
@@ -26,7 +26,7 @@ createServer({
           type: 'withdraw',
           category: 'Casa',
           amount: '1100',
-          created_at: new Date('2021-02-14 11:00:00'),
+          createdAt: new Date('2021-02-14'),
         }
       ]
     })
@@ -42,7 +42,10 @@ createServer({
     this.post('/transactions', (schema, request) =>{
       const data = JSON.parse(request.requestBody)
 
-      return schema.create('transaction', data)
+      return schema.create('transaction', {
+        ...data,
+        createdAt: new Date(),
+      })
     })
 
   }
